@@ -25,11 +25,11 @@ var other = {
 }
 
 if (john.score > smith.score && john.score > other.score) {
-  console.log(john.firstname + ' is the winner');
+  console.log(john.firstname + ' is the winner with a score of ' + john.score);
 }else if(smith.score > john.score && smith.score > other.score){
-  console.log(smith.firstname + ' is the winner');
+  console.log(smith.firstname + ' is the winner with a score of ' + smith.score);
 }else if(other.score > john.score && other.score > smith.score){
-  console.log(other.firstname + ' is the winner');
+  console.log(other.firstname + ' is the winner with a score of ' + other.score);
 }else{
   console.log('There is a draw');
 }
