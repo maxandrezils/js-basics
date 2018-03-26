@@ -28,6 +28,8 @@ if (john.score > smith.score && john.score > other.score) {
   console.log(john.firstname + ' is the winner');
 }else if(smith.score > john.score && smith.score > other.score){
   console.log(smith.firstname + ' is the winner');
-}else{
+}else if(other.score > john.score && other.score > smith.score){
   console.log(other.firstname + ' is the winner');
+}else{
+  console.log('There is a draw');
 }
