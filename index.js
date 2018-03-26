@@ -17,3 +17,11 @@ if(isMarried){
   console.log('NO!');
 }
 // The else isnt required
+
+if(23 == '23'){
+  console.log('something to print');
+} // Type coersion is allowed on comparison, will return true
+
+if(23 === '23'){
+  console.log('something to print');
+} // Type coersion is not allowed on check for type comparison, will return false
