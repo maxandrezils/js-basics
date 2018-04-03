@@ -25,21 +25,24 @@ for (let i = 0; i < yearsOfBirth.length; i++) {
 }
 for(let l = 0; l < ages.length; l++){
   if(ages[l] >= 18){
-    console.log(`With an age of ${ages[l]} person is of age`)
+    console.log(`With an age of ${ages[l]} person is of age`);
   }else{
-    console.log(`With an age of ${ages[l]} person is under age`)
+    console.log(`With an age of ${ages[l]} person is under age`);
   }
 }
 
-function printFullAge(yearOfBirth){
-  let age = parseInt(new Date().getFullYear() - yearOfBirth);
-  let ofAge;
-  if(age >= 18){
-    ofAge = true;
-  }else{
-    ofAge = false;
+function printFullAge(years){
+  let full = [];
+  for(let i = 0; i < years.length; i++){
+    if((new Date().getFullYear() - years[i]) >= 18){
+      full.push(true);
+    }else{
+      full.push(false);
+    }
   }
-  return ofAge;
+  return full;
 }
-full_1 = printFullAge(1988);
-full_2 = printFullAge(2010);
+full_1 = printFullAge([1965, 2008, 1992]);
+full_2 = printFullAge([1988, 2010, 2000]);
+console.log(full_1);
+console.log(full_2);
