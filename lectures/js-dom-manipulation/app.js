@@ -53,10 +53,15 @@ function winCondition(){
   if(scores[activePlayer] >= 100) alert(`Player ${activePlayer + 1} has won`);
 }
 function reset(){
-  scores = [0, 0];
-  roundScore = 0;
-  activePlayer = 0;
-  document.q
+  if(confirm('Are you sure you want to start a new game?')){
+    scores = [0, 0];
+    roundScore = 0;
+    activePlayer = 0;
+    document.querySelector('#score-0').textContent = '0';
+    document.querySelector('#score-1').textContent = '0';
+    document.querySelector('#current-0').textContent = '0';
+    document.querySelector('#current-0').textContent = '0';
+  }
 }
 
 function hold(){
