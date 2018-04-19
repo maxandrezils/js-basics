@@ -7,31 +7,37 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
   Challenges:
-  1. Add a second die.
+Change the game to follow these rules:
+
+1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. (Hint: Always save the previous dice roll in a separate variable)
+2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a good oportunity to use google to figure this out :)
+3. Add another dice to the game, so that there are two dices now. The player looses his current score when one of them is a 1. (Hint: you will need CSS to position the second dice, so take a look at the CSS code for the first one.)
 */
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
+let gameActive =
 
+const init = () => {
+
+};
 const rollDice = document.querySelector('.btn-roll').
   addEventListener('click', () => {
     let die1 = Math.floor(Math.random() * 6) + 1;
     let die2 = Math.floor(Math.random() * 6) + 1;
+    let total = die1 + die2;
     document.querySelector('.dice-1').src = `dice-${die1}.png`;
     document.querySelector('.dice-2').src = `dice-${die2}.png`;
-    updateCurrentScore(dice);
+    updateCurrentScore(die1, die2);
   }
 );
 
-const updateCurrentScore = (diceScore) => {
-  if(diceScore != 1){
-    roundScore += diceScore;
-    document.querySelector('#current-' + activePlayer).textContent = roundScore;
-  }else{
-    roundScore = 0;
-    document.querySelector('#current-' + activePlayer).textContent = roundScore;
-    changeActivePlayer();
-    activePlayerstyling();
+const updateCurrentScore = (die1, die2) => {
+  //check for a score of 1 on either die
+  let total = 0;
+  if( die1 !== 1 || die2 !== 1 ){
+    total += die1 + die2;
+    alert(total)
   }
 };
 
