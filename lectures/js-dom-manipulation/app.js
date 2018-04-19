@@ -7,17 +7,21 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
   Challenges:
-  1. Add a second die
+  1. Add a second die.
 */
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
 
-const rollDice = () => {
-  let dice = Math.floor(Math.random() * 6) + 1;
-  document.querySelector('.dice').src = 'dice-' + dice + '.png';
-  updateCurrentScore(dice);
-};
+const rollDice = document.querySelector('.btn-roll').
+  addEventListener('click', () => {
+    let die1 = Math.floor(Math.random() * 6) + 1;
+    let die2 = Math.floor(Math.random() * 6) + 1;
+    document.querySelector('.dice-1').src = `dice-${die1}.png`;
+    document.querySelector('.dice-2').src = `dice-${die2}.png`;
+    updateCurrentScore(dice);
+  }
+);
 
 const updateCurrentScore = (diceScore) => {
   if(diceScore != 1){
