@@ -1,25 +1,21 @@
 /*
 GAME RULES:
-  1. The game has 2 players, playing in rounds
-  2. In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
-  2.1. BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
-  3. The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
-  4. The first player to reach 100 points on GLOBAL score wins the game
-  5. Add a flag to check if the win condition has been met.
+- The game has 2 players, playing in rounds
+- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score
+- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
+- The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
+- The first player to reach 100 points on GLOBAL score wins the game
 
-
+  Challenges:
 Change the game to follow these rules:
 
 1. A player looses his ENTIRE score when he rolls two 6 in a row. After that, it's the next player's turn. (Hint: Always save the previous dice roll in a separate variable)
 2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined score of 100. (Hint: you can read that value with the .value property in JavaScript. This is a good oportunity to use google to figure this out :)
 3. Add another dice to the game, so that there are two dices now. The player looses his current score when one of them is a 1. (Hint: you will need CSS to position the second dice, so take a look at the CSS code for the first one.)
-  TODO: Show second die
-  TODO: add second die to the scores
 */
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
-let gameWon = false;
 
 const rollDice = document.querySelector('.btn-roll').
   addEventListener('click', () => {
@@ -37,8 +33,11 @@ const updateCurrentScore = (die1, die2) => {
   let total = 0;
   if( die1 !== 1 || die2 !== 1 ){
     total += die1 + die2;
+    winCondition();
+    // TODO check for win condition
+    // TODO
   }else{
-
+    // TODO: add logic to switch player
   }
 };
 
@@ -58,7 +57,6 @@ const activePlayerstyling = () => {
 };
 
 const addRoundToTotalScore = () => {
-
   scores[activePlayer] += roundScore;
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 };
