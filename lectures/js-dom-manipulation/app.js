@@ -5,15 +5,20 @@ GAME RULES:
   2.1. BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn
   3. The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
   4. The first player to reach 100 points on GLOBAL score wins the game
+  5. Add a flag to check if the win condition has been met.
 
   Challenges:
   1. A player loses his/her entire score when rolling two sixes in a row.
   2. Add an input field to the HTML where players can set the winning score so that they can change the predifined score of 100
   3. Add another dice to the game so that there are two dice. The player loses their current score if one of the die is 1.
+
+  TODO: Show second die
+  TODO: add second die to the scores
 */
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
+let gameWon = false;
 
 function rollDice(){
   let dice = Math.floor(Math.random() * 6) + 1;
@@ -48,34 +53,38 @@ function activePlayerstyling(){
   sectionStyling1.toggle('active');
 }
 
-<<<<<<< refs/remotes/origin/master
+
 function addRoundToTotalScore(){
   scores[activePlayer] += roundScore;
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 }
 
+
 function winCondition(){
-  if(scores[activePlayer] >= 100) alert(`Player ${activePlayer + 1} has won`);
+  if(scores[activePlayer] >= 10) alert(`Player ${activePlayer + 1} has won`);
 }
-function reset(){
-  if(confirm('Are you sure you want to start a new game?')){
-    scores = [0, 0];
-    roundScore = 0;
-    activePlayer = 0;
-    document.querySelector('#score-0').textContent = '0';
-    document.querySelector('#score-1').textContent = '0';
-    document.querySelector('#current-0').textContent = '0';
-    document.querySelector('#current-0').textContent = '0';
-  }
+
+function newGame(){
+  scores = [0, 0];
+  roundScore = 0;
+  activePlayer = 0;
+  document.querySelector('#score-0').textContent = '0';
+  document.querySelector('#score-1').textContent = '0';
+  document.querySelector('#current-0').textContent = '0';
+  document.querySelector('#current-0').textContent = '0';
 }
+
 
 function hold(){
   addRoundToTotalScore();
   activePlayerstyling()
   changeActivePlayer()
   winCondition();
-=======
-function updateTotalScores(){
+}
 
->>>>>>> started on challenges
+
+function reset(){
+  if(confirm('Are you sure you want to start a new game?')){
+    newGame();
+  }
 }
