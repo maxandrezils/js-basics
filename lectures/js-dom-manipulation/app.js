@@ -6,18 +6,20 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLOBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 
+  Challenges:
+  1. Add a second die
 */
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
 
-function rollDice(){
+const rollDice = () => {
   let dice = Math.floor(Math.random() * 6) + 1;
   document.querySelector('.dice').src = 'dice-' + dice + '.png';
   updateCurrentScore(dice);
-}
+};
 
-function updateCurrentScore(diceScore){
+const updateCurrentScore = (diceScore) => {
   if(diceScore != 1){
     roundScore += diceScore;
     document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -27,32 +29,33 @@ function updateCurrentScore(diceScore){
     changeActivePlayer();
     activePlayerstyling();
   }
-}
+};
 
-function changeActivePlayer(){
+const changeActivePlayer = () => {
   if(activePlayer == 0){
     activePlayer = 1;
   }else{
     activePlayer = 0;
   }
-}
+};
 
-function activePlayerstyling(){
+const activePlayerstyling = () => {
   let sectionStyling0 = document.querySelector('.player-0-panel').classList;
   let sectionStyling1 = document.querySelector('.player-1-panel').classList;
   sectionStyling0.toggle('active');
   sectionStyling1.toggle('active');
-}
+};
 
-function addRoundToTotalScore(){
+const addRoundToTotalScore = () => {
   scores[activePlayer] += roundScore;
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-}
+};
 
-function winCondition(){
+const winCondition = () => {
   if(scores[activePlayer] >= 100) alert(`Player ${activePlayer + 1} has won`);
-}
-function reset(){
+};
+
+const reset = () => {
   if(confirm('Are you sure you want to start a new game?')){
     scores = [0, 0];
     roundScore = 0;
@@ -62,11 +65,11 @@ function reset(){
     document.querySelector('#current-0').textContent = '0';
     document.querySelector('#current-0').textContent = '0';
   }
-}
+};
 
-function hold(){
+const hold = () => {
   addRoundToTotalScore();
   activePlayerstyling()
   changeActivePlayer()
   winCondition();
-}
+};
