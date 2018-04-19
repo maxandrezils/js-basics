@@ -16,11 +16,7 @@ Change the game to follow these rules:
 let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
-let gameActive =
 
-const init = () => {
-
-};
 const rollDice = document.querySelector('.btn-roll').
   addEventListener('click', () => {
     let die1 = Math.floor(Math.random() * 6) + 1;
@@ -37,7 +33,8 @@ const updateCurrentScore = (die1, die2) => {
   let total = 0;
   if( die1 !== 1 || die2 !== 1 ){
     total += die1 + die2;
-    alert(total)
+  }else{
+
   }
 };
 
@@ -77,9 +74,15 @@ const reset = () => {
   }
 };
 
-const hold = () => {
-  addRoundToTotalScore();
-  activePlayerstyling()
-  changeActivePlayer()
-  winCondition();
+const winnerStyling = () => {
+  document.querySelector(``)
 };
+
+const hold = document.querySelector('.btn-hold').
+  addEventListener('click', () => {
+    addRoundToTotalScore();
+    activePlayerstyling()
+    changeActivePlayer()
+    winCondition();
+  }
+);
