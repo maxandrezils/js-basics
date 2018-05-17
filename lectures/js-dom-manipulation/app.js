@@ -17,36 +17,9 @@ let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
 
-const rollDice = document.querySelector('.btn-roll').
-  addEventListener('click', () => {
-    let die1 = Math.floor(Math.random() * 6) + 1;
-    let die2 = Math.floor(Math.random() * 6) + 1;
-    let total = die1 + die2;
-    document.querySelector('.dice-1').src = `dice-${die1}.png`;
-    document.querySelector('.dice-2').src = `dice-${die2}.png`;
-    updateCurrentScore(die1, die2);
-  }
-);
-
-const updateCurrentScore = (die1, die2) => {
-  //check for a score of 1 on either die
-  let total = 0;
-  if( die1 !== 1 || die2 !== 1 ){
-    total += die1 + die2;
-    winCondition();
-    // TODO check for win condition
-    // TODO
-  }else{
-    // TODO: add logic to switch player
-  }
-};
-
 const changeActivePlayer = () => {
-  if(activePlayer == 0){
-    activePlayer = 1;
-  }else{
-    activePlayer = 0;
-  }
+  activePlayer = activePlayer == 0 ? 1 : 0;
+  resetRoundScore();
 };
 
 const activePlayerstyling = () => {
@@ -56,6 +29,32 @@ const activePlayerstyling = () => {
   sectionStyling1.toggle('active');
 };
 
+const rollDice = document.querySelector('.btn-roll').
+  addEventListener('click', () => {
+    let die1 = Math.floor(Math.random() * 6) + 1;
+    let die2 = Math.floor(Math.random() * 6) + 1;
+    document.querySelector('.dice-1').style = 'block';
+    document.querySelector('.dice-2').style = 'block';
+    document.querySelector('.dice-1').src = `dice-${die1}.png`;
+    document.querySelector('.dice-2').src = `dice-${die2}.png`;
+  if( die1 != 1 || die2 != 1 ){
+    roundScore += die1 + die2;
+    document.querySelector(`#current-${activePlayer}`).textContent = roundScore.toString();
+  }else{
+    changeActivePlayer();
+    activePlayerstyling();
+  }
+});
+
+const resetRoundScore = () => {
+  roundScore = 0;
+  if( activePlayer == 0 ){
+    document.querySelector('#current-1').textContent = 0;
+  }else{
+    document.querySelector('#current-0').textContent = 0;
+  }
+};
+
 const addRoundToTotalScore = () => {
   scores[activePlayer] += roundScore;
   document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
@@ -63,23 +62,23 @@ const addRoundToTotalScore = () => {
 
 const winCondition = () => {
   if(scores[activePlayer] >= 100) alert(`Player ${activePlayer + 1} has won`);
+  // TODO: add logic to update styling for winner
 };
 
-const reset = () => {
-  if(confirm('Are you sure you want to start a new game?')){
-    scores = [0, 0];
-    roundScore = 0;
-    activePlayer = 0;
-    document.querySelector('#score-0').textContent = '0';
-    document.querySelector('#score-1').textContent = '0';
-    document.querySelector('#current-0').textContent = '0';
-    document.querySelector('#current-0').textContent = '0';
+const reset = document.querySelector('.btn-new').
+  addEventListener('click', () => {
+    if (confirm('Are you sure you want to start a new game?')) {
+      scores = [0, 0];
+      roundScore = 0;
+      activePlayer = 0;
+      document.querySelector('#score-0').textContent = '0';
+      document.querySelector('#score-1').textContent = '0';
+      document.querySelector('#current-0').textContent = '0';
+      document.querySelector('#current-0').textContent = '0';
+      // TODO: Set player one as active player
+    }
   }
-};
-
-const winnerStyling = () => {
-  document.querySelector(``)
-};
+);
 
 const hold = document.querySelector('.btn-hold').
   addEventListener('click', () => {
