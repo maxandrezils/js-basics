@@ -17,6 +17,18 @@ let scores = [0, 0];
 let roundScore = 0;
 let activePlayer = 0;
 
+const changeActivePlayer = () => {
+  activePlayer = activePlayer == 0 ? 1 : 0;
+  resetRoundScore();
+};
+
+const activePlayerstyling = () => {
+  let sectionStyling0 = document.querySelector('.player-0-panel').classList;
+  let sectionStyling1 = document.querySelector('.player-1-panel').classList;
+  sectionStyling0.toggle('active');
+  sectionStyling1.toggle('active');
+};
+
 const rollDice = document.querySelector('.btn-roll').
   addEventListener('click', () => {
     let die1 = Math.floor(Math.random() * 6) + 1;
@@ -25,33 +37,22 @@ const rollDice = document.querySelector('.btn-roll').
     document.querySelector('.dice-2').style = 'block';
     document.querySelector('.dice-1').src = `dice-${die1}.png`;
     document.querySelector('.dice-2').src = `dice-${die2}.png`;
-    updateCurrentScore();
-  }
-);
-
-const updateCurrentScore = () => {
-  //check for a score of 1 on either die
-  let total = 0;
-  if( rollDice.die1 !== 1 && rollDice.die2 !== 1 ){
-    total += die1 + die2;
-    winCondition();
-    roundScore += total;
-    document.querySelector(`#score${activePlayer}`).textContent = roundScore.toString();
-    // TODO: update roundScore
+  if( die1 != 1 || die2 != 1 ){
+    roundScore += die1 + die2;
+    document.querySelector(`#current-${activePlayer}`).textContent = roundScore.toString();
   }else{
-    // TODO: add logic to switch player
+    changeActivePlayer();
+    activePlayerstyling();
   }
-};
+});
 
-const changeActivePlayer = () => {
-  activePlayer = activePlayer == 0 ? 1 : 0;
-};
-
-const activePlayerstyling = () => {
-  let sectionStyling0 = document.querySelector('.player-0-panel').classList;
-  let sectionStyling1 = document.querySelector('.player-1-panel').classList;
-  sectionStyling0.toggle('active');
-  sectionStyling1.toggle('active');
+const resetRoundScore = () => {
+  roundScore = 0;
+  if( activePlayer == 0 ){
+    document.querySelector('#current-1').textContent = 0;
+  }else{
+    document.querySelector('#current-0').textContent = 0;
+  }
 };
 
 const addRoundToTotalScore = () => {
