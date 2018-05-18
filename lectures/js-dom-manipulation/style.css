@@ -180,3 +180,10 @@ i {
   font-weight: 300;
   color: #EB4D4D;
 }
+.winning-score {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  position: absolute;
+  top: 500px;
+  left: 50px;
+}
