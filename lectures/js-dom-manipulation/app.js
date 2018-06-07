@@ -66,7 +66,7 @@ const rollDice = document.querySelector('.btn-roll').
     document.querySelector('.dice-2').style = 'block';
     document.querySelector('.dice-1').src = `dice-${die1}.png`;
     document.querySelector('.dice-2').src = `dice-${die2}.png`;
-  if( die1 != 1 || die2 != 1 ){
+  if( die1 != 1 && die2 != 1 ){
     roundScore += die1 + die2;
     document.querySelector(`#current-${activePlayer}`).textContent = roundScore.toString();
   }else{
@@ -76,11 +76,8 @@ const rollDice = document.querySelector('.btn-roll').
 
 const resetRoundScore = () => {
   roundScore = 0;
-  if( activePlayer == 0 ){
-    document.querySelector('#current-1').textContent = 0;
-  }else{
-    document.querySelector('#current-0').textContent = 0;
-  }
+  document.querySelector('#current-1').textContent = 0;
+  document.querySelector('#current-0').textContent = 0;
 };
 
 const addRoundToTotalScore = () => {
@@ -91,6 +88,7 @@ const addRoundToTotalScore = () => {
 const winCondition = () => {
   if(scores[activePlayer] >= winScore) alert(`Player ${activePlayer + 1} has won`);
   // TODO: add logic to update styling for winner
+  setPlayerOneActive();
 };
 
 const reset = document.querySelector('.btn-new').
@@ -109,17 +107,14 @@ const reset = document.querySelector('.btn-new').
   }
 );
 const setPlayerOneActive = () => {
-  if(activePlayer === 0 ){
-    // TODO add class for active to player 1 if it is not active
-  }else{
-    // TODO remove class for active if player 2 is active and apply it to player 1
-  }
+  document.querySelector('.player-0-panel').classList.add('active');
+  document.querySelector('.player-1-panel').classList.remove('active');
 };
 
 const hold = document.querySelector('.btn-hold').
   addEventListener('click', () => {
-    winCondition();
     addRoundToTotalScore();
+    winCondition();
     changeActivePlayer();
   }
 );
